@@ -103,45 +103,119 @@ Live ESP32/serial/Wi-Fi integration is intentionally left for the next integrati
 
 
 ISHAA:
-MINEGUARD-X
+# MINEGUARD-X
 
-V2V SOFTWARE SIMULATION
+## V2V Software Simulation
 
-This module simulates vehicle-to-vehicle communication
-using dummy sensor values.
+This module simulates **Vehicle-to-Vehicle (V2V) communication** for the MINEGUARD-X mine vehicle safety prototype using dummy sensor values.
 
-Inputs:
-- Distance
-- Fog Level
+The software can be developed and tested independently before integration with the physical vehicles.
 
-The system calculates collision risk based on distance
-and environmental visibility.
+## Inputs
 
-Risk Levels:
-0 - SAFE
-1 - CAUTION
-2 - WARNING
-3 - CRITICAL
+The current simulation uses:
 
-The generated V2V packet contains:
-- Vehicle ID
-- Distance
-- Fog Level
-- Risk Level
-- Timestamp
+* Distance
+* Fog Level
 
-The receiver evaluates the received packet and performs
-a simulated response:
+## Risk Calculation
 
-SAFE     - Continue normal operation
-CAUTION  - Reduce speed and remain alert
-WARNING  - Slow down and alert driver
-CRITICAL - Stop vehicle
+The system calculates collision risk based on vehicle distance and environmental visibility.
 
-Current implementation:
-Software simulation using Python and dummy values.
+### Risk Levels
 
-Future implementation:
-Dummy values will be replaced with actual distance and
-fog/visibility sensor readings. V2V communication will
-be implemented using ESP-NOW/Wi-Fi between ESP32 devices.
+| Level | Risk     |
+| ----- | -------- |
+| 0     | SAFE     |
+| 1     | CAUTION  |
+| 2     | WARNING  |
+| 3     | CRITICAL |
+
+## V2V Packet
+
+Each simulated vehicle generates a V2V packet containing:
+
+* Vehicle ID
+* Distance
+* Fog Level
+* Risk Level
+* Timestamp
+
+## Simulated Communication
+
+The current implementation simulates bidirectional communication between two vehicles:
+
+
+Vehicle 1
+    ↓
+Distance + Fog Data
+    ↓
+Risk Calculation
+    ↓
+V2V Packet
+    ↓
+Vehicle 2 Receives and Evaluates Packet
+    ↓
+Risk-Based Action
+
+
+Vehicle 2
+    ↓
+Distance + Fog Data
+    ↓
+Risk Calculation
+    ↓
+V2V Packet
+    ↓
+Vehicle 1 Receives and Evaluates Packet
+    ↓
+Risk-Based Action
+
+
+## Receiver Response
+
+After receiving a V2V packet, the vehicle performs a simulated response based on the received risk level:
+
+* **SAFE** — Continue normal operation
+* **CAUTION** — Reduce speed and remain alert
+* **WARNING** — Slow down and alert the driver
+* **CRITICAL** — Stop the vehicle
+
+## Current Implementation
+
+The current version is a **Python-based software simulation** using dummy values for distance and fog level.
+
+It demonstrates:
+
+* Distance-based risk calculation
+* Fog-aware risk evaluation
+* V2V packet creation
+* Simulated bidirectional communication between two vehicles
+* Packet reception and evaluation
+* Risk-based warning and response logic
+
+## Future Integration
+
+During hardware integration, the dummy values will be replaced with actual sensor readings from the physical vehicles.
+
+The planned implementation is:
+
+text
+Distance / Fog Sensors
+        ↓
+Actual Sensor Readings
+        ↓
+Risk Calculation Logic
+        ↓
+V2V Packet Creation
+        ↓
+ESP-NOW / Wi-Fi Communication
+        ↓
+Other ESP32 Vehicle
+        ↓
+Packet Evaluation
+        ↓
+Warning / Slow / Stop Response
+
+
+The current Python simulation provides the software logic that can later be adapted and integrated with the ESP32-based vehicle system.
