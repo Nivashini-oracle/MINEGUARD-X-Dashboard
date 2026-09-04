@@ -109,7 +109,7 @@ ISHAA:
 
 This module simulates **Vehicle-to-Vehicle (V2V) communication** for the MINEGUARD-X mine vehicle safety prototype using dummy sensor values.
 
-The software can be developed and tested independently before integration with the physical vehicles.
+The software is designed and tested independently before integration with the physical vehicles.
 
 ## Inputs
 
@@ -124,16 +124,23 @@ The system calculates collision risk based on vehicle distance and environmental
 
 ### Risk Levels
 
-| Level | Risk     |
-| ----- | -------- |
-| 0     | SAFE     |
-| 1     | CAUTION  |
-| 2     | WARNING  |
-| 3     | CRITICAL |
+* 0 — SAFE
+* 1 — CAUTION
+* 2 — WARNING
+* 3 — CRITICAL
+
+## Fog Levels
+
+* 0 — CLEAR
+* 1 — LOW FOG
+* 2 — MEDIUM FOG
+* 3 — HIGH FOG
+
+High fog can increase the calculated risk level to represent reduced visibility.
 
 ## V2V Packet
 
-Each simulated vehicle generates a V2V packet containing:
+Each vehicle generates a V2V packet containing:
 
 * Vehicle ID
 * Distance
@@ -141,40 +148,50 @@ Each simulated vehicle generates a V2V packet containing:
 * Risk Level
 * Timestamp
 
-## Simulated Communication
+## Phase 1 — Risk and V2V Simulation
 
-The current implementation simulates bidirectional communication between two vehicles:
+The initial simulation implements:
 
+* Dummy distance and fog inputs
+* Distance-based risk calculation
+* Fog-aware risk evaluation
+* V2V packet creation
+* Simulated packet reception
+* Risk-based response logic
 
-Vehicle 1
-    ↓
-Distance + Fog Data
-    ↓
-Risk Calculation
-    ↓
-V2V Packet
-    ↓
-Vehicle 2 Receives and Evaluates Packet
-    ↓
-Risk-Based Action
+## Phase 2 — Bidirectional V2V Communication
 
+The simulation has been extended to support two vehicles communicating with each other.
 
-Vehicle 2
-    ↓
-Distance + Fog Data
-    ↓
-Risk Calculation
-    ↓
-V2V Packet
-    ↓
-Vehicle 1 Receives and Evaluates Packet
-    ↓
-Risk-Based Action
+Each vehicle:
 
+1. Uses its own dummy distance and fog values.
+2. Calculates its own collision risk.
+3. Creates a V2V packet.
+4. Sends its simulated packet to the other vehicle.
+5. Receives and evaluates the other vehicle's packet.
+6. Performs a simulated risk-based response.
+
+```text
+Vehicle 1                          Vehicle 2
+    │                                  │
+Distance + Fog                    Distance + Fog
+    │                                  │
+Risk Calculation                  Risk Calculation
+    │                                  │
+Create V2V Packet                 Create V2V Packet
+    │                                  │
+    ├────────── V2V ────────────────► │
+    │ ◄───────── V2V ─────────────────┤
+    │                                  │
+Receive + Evaluate                Receive + Evaluate
+    │                                  │
+Risk-Based Action                 Risk-Based Action
+```
 
 ## Receiver Response
 
-After receiving a V2V packet, the vehicle performs a simulated response based on the received risk level:
+After receiving a packet, the vehicle performs a simulated response based on the risk level:
 
 * **SAFE** — Continue normal operation
 * **CAUTION** — Reduce speed and remain alert
@@ -183,24 +200,34 @@ After receiving a V2V packet, the vehicle performs a simulated response based on
 
 ## Current Implementation
 
-The current version is a **Python-based software simulation** using dummy values for distance and fog level.
+The current version is a **Python-based software simulation** using dummy values.
 
-It demonstrates:
+### Completed Features
 
 * Distance-based risk calculation
-* Fog-aware risk evaluation
+* Fog-aware risk calculation
+* Risk level classification
 * V2V packet creation
-* Simulated bidirectional communication between two vehicles
+* Timestamp generation
+* Simulated Vehicle 1 → Vehicle 2 communication
+* Simulated Vehicle 2 → Vehicle 1 communication
+* Bidirectional V2V communication simulation
 * Packet reception and evaluation
 * Risk-based warning and response logic
 
+## Current Limitation
+
+The current implementation does not yet communicate wirelessly between physical vehicles.
+
+The distance and fog values are dummy values, and packet transmission is simulated within the Python program.
+
 ## Future Integration
 
-During hardware integration, the dummy values will be replaced with actual sensor readings from the physical vehicles.
+During hardware integration, the dummy values will be replaced with actual sensor readings.
 
-The planned implementation is:
+The planned system architecture is:
 
-text
+```text
 Distance / Fog Sensors
         ↓
 Actual Sensor Readings
@@ -213,9 +240,10 @@ ESP-NOW / Wi-Fi Communication
         ↓
 Other ESP32 Vehicle
         ↓
-Packet Evaluation
+Packet Reception and Evaluation
         ↓
 Warning / Slow / Stop Response
+```
 
+The current software simulation provides the core V2V communication and risk-evaluation logic for later integration with the ESP32-based physical vehicle system.
 
-The current Python simulation provides the software logic that can later be adapted and integrated with the ESP32-based vehicle system.
