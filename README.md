@@ -99,4 +99,49 @@ The vehicle firmware/team will provide the actual risk classification and thresh
 
 This version is a UI skeleton using mock data.
 
-Live ESP32/serial/Wi-Fi integration is intentionally left for the next integration stage.
+Live ESP32/serial/Wi-Fi integration is intentionally left for the next integration st
+
+
+ISHAA:😘
+MINEGUARD-X
+
+V2V SOFTWARE SIMULATION
+
+This module simulates vehicle-to-vehicle communication
+using dummy sensor values.
+
+Inputs:
+- Distance
+- Fog Level
+
+The system calculates collision risk based on distance
+and environmental visibility.
+
+Risk Levels:
+0 - SAFE
+1 - CAUTION
+2 - WARNING
+3 - CRITICAL
+
+The generated V2V packet contains:
+- Vehicle ID
+- Distance
+- Fog Level
+- Risk Level
+- Timestamp
+
+The receiver evaluates the received packet and performs
+a simulated response:
+
+SAFE     - Continue normal operation
+CAUTION  - Reduce speed and remain alert
+WARNING  - Slow down and alert driver
+CRITICAL - Stop vehicle
+
+Current implementation:
+Software simulation using Python and dummy values.
+
+Future implementation:
+Dummy values will be replaced with actual distance and
+fog/visibility sensor readings. V2V communication will
+be implemented using ESP-NOW/Wi-Fi between ESP32 devices.
