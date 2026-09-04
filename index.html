@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MINEGUARD-X | Control Room</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="dashboard-header">
+        <div>
+            <h1>MINEGUARD-X</h1>
+            <p>Mine Vehicle Safety & Visibility Monitoring System</p>
+        </div>
+
+        <div class="system-status">
+            <span class="status-dot"></span>
+            SYSTEM ONLINE
+        </div>
+    </header>
+
+
+    <!-- COLLISION WARNING -->
+    <section id="collision-warning" class="warning-banner safe">
+        <span class="warning-icon">⚠</span>
+        <div>
+            <strong id="warning-title">SYSTEM STATUS: SAFE</strong>
+            <p id="warning-message">No critical collision risk detected.</p>
+        </div>
+    </section>
+
+
+    <!-- VEHICLE MONITORING -->
+    <main class="dashboard-container">
+
+        <h2>Vehicle Monitoring</h2>
+
+        <div class="vehicle-grid">
+
+            <!-- VEHICLE 1 -->
+            <div class="vehicle-card">
+
+                <div class="vehicle-card-header">
+                    <h3>VEHICLE 1</h3>
+                    <span class="vehicle-id">ID: V001</span>
+                </div>
+
+                <div class="data-grid">
+
+                    <div class="data-box">
+                        <span class="data-label">STATUS</span>
+                        <span id="vehicle1-status" class="data-value">
+                            MOVING
+                        </span>
+                    </div>
+
+                    <div class="data-box">
+                        <span class="data-label">DISTANCE</span>
+                        <span id="vehicle1-distance" class="data-value">
+                            8.5 m
+                        </span>
+                    </div>
+
+                    <div class="data-box">
+                        <span class="data-label">FOG LEVEL</span>
+                        <span id="vehicle1-fog" class="data-value">
+                            LOW
+                        </span>
+                    </div>
+
+                    <div class="data-box">
+                        <span class="data-label">RISK LEVEL</span>
+                        <span id="vehicle1-risk" class="data-value risk-safe">
+                            SAFE
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- VEHICLE 2 -->
+            <div class="vehicle-card">
+
+                <div class="vehicle-card-header">
+                    <h3>VEHICLE 2</h3>
+                    <span class="vehicle-id">ID: V002</span>
+                </div>
+
+                <div class="data-grid">
+
+                    <div class="data-box">
+                        <span class="data-label">STATUS</span>
+                        <span id="vehicle2-status" class="data-value">
+                            MOVING
+                        </span>
+                    </div>
+
+                    <div class="data-box">
+                        <span class="data-label">DISTANCE</span>
+                        <span id="vehicle2-distance" class="data-value">
+                            5.2 m
+                        </span>
+                    </div>
+
+                    <div class="data-box">
+                        <span class="data-label">FOG LEVEL</span>
+                        <span id="vehicle2-fog" class="data-value">
+                            MEDIUM
+                        </span>
+                    </div>
+
+                    <div class="data-box">
+                        <span class="data-label">RISK LEVEL</span>
+                        <span id="vehicle2-risk" class="data-value risk-warning">
+                            WARNING
+                        </span>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- SYSTEM INFORMATION -->
+        <section class="system-info">
+
+            <h2>System Information</h2>
+
+            <div class="info-grid">
+
+                <div class="info-item">
+                    <span>Vehicles Connected</span>
+                    <strong>2</strong>
+                </div>
+
+                <div class="info-item">
+                    <span>Monitoring Mode</span>
+                    <strong>LOCAL</strong>
+                </div>
+
+                <div class="info-item">
+                    <span>Data Source</span>
+                    <strong id="data-source">MOCK DATA</strong>
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+    <footer>
+        MINEGUARD-X | Smart Automation for Mine Vehicle Safety
+    </footer>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
