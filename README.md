@@ -102,7 +102,7 @@ This version is a UI skeleton using mock data.
 Live ESP32/serial/Wi-Fi integration is intentionally left for the next integration st
 
 
-ISHAA:😘
+ISHAA:
 MINEGUARD-X
 
 V2V SOFTWARE SIMULATION
