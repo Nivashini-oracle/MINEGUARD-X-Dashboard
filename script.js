@@ -1,3 +1,4 @@
+```javascript
 /* =========================================
    MINEGUARD-X DASHBOARD
    JavaScript + Mock Vehicle Data
@@ -11,7 +12,6 @@ const vehicleData = {
         id: "V001",
         status: "MOVING",
         distance: 8.5,
-        fog: "LOW",
         risk: "SAFE"
     },
 
@@ -19,7 +19,6 @@ const vehicleData = {
         id: "V002",
         status: "MOVING",
         distance: 5.2,
-        fog: "MEDIUM",
         risk: "WARNING"
     }
 };
@@ -35,9 +34,6 @@ function updateVehicle1() {
     document.getElementById("vehicle1-distance").textContent =
         vehicleData.vehicle1.distance + " m";
 
-    document.getElementById("vehicle1-fog").textContent =
-        vehicleData.vehicle1.fog;
-
     document.getElementById("vehicle1-risk").textContent =
         vehicleData.vehicle1.risk;
 }
@@ -52,9 +48,6 @@ function updateVehicle2() {
 
     document.getElementById("vehicle2-distance").textContent =
         vehicleData.vehicle2.distance + " m";
-
-    document.getElementById("vehicle2-fog").textContent =
-        vehicleData.vehicle2.fog;
 
     document.getElementById("vehicle2-risk").textContent =
         vehicleData.vehicle2.risk;
@@ -213,3 +206,4 @@ function updateDashboard() {
 /* ---------- START DASHBOARD ---------- */
 
 updateDashboard();
+```
