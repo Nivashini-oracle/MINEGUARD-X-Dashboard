@@ -1,3 +1,4 @@
+```python
 import time
 
 
@@ -5,16 +6,6 @@ import time
 # MINEGUARD-X
 # PHASE 2 - BIDIRECTIONAL V2V SIMULATION
 # =====================================
-
-
-# -------------------------------------
-# FOG LEVELS
-# -------------------------------------
-
-CLEAR = 0
-LOW_FOG = 1
-MEDIUM_FOG = 2
-HIGH_FOG = 3
 
 
 # -------------------------------------
@@ -31,9 +22,9 @@ CRITICAL = 3
 # CALCULATE RISK
 # -------------------------------------
 
-def calculate_risk(distance, fog_level):
+def calculate_risk(distance):
 
-    # Base risk from distance
+    # Risk is calculated only from distance
 
     if distance > 100:
         risk = SAFE
@@ -46,12 +37,6 @@ def calculate_risk(distance, fog_level):
 
     else:
         risk = CRITICAL
-
-
-    # High fog increases risk
-
-    if fog_level == HIGH_FOG:
-        risk = min(risk + 1, CRITICAL)
 
     return risk
 
@@ -76,36 +61,16 @@ def risk_name(risk):
 
 
 # -------------------------------------
-# FOG NUMBER TO NAME
-# -------------------------------------
-
-def fog_name(fog_level):
-
-    if fog_level == CLEAR:
-        return "CLEAR"
-
-    elif fog_level == LOW_FOG:
-        return "LOW FOG"
-
-    elif fog_level == MEDIUM_FOG:
-        return "MEDIUM FOG"
-
-    else:
-        return "HIGH FOG"
-
-
-# -------------------------------------
 # CREATE V2V PACKET
 # -------------------------------------
 
-def create_packet(vehicle_id, distance, fog_level):
+def create_packet(vehicle_id, distance):
 
-    risk = calculate_risk(distance, fog_level)
+    risk = calculate_risk(distance)
 
     packet = {
         "vehicle_id": vehicle_id,
         "distance": distance,
-        "fog_level": fog_level,
         "risk_level": risk,
         "timestamp": time.time()
     }
@@ -123,7 +88,6 @@ def receive_packet(receiver_id, packet):
 
     print("From Vehicle :", packet["vehicle_id"])
     print("Distance     :", packet["distance"], "cm")
-    print("Fog Level    :", fog_name(packet["fog_level"]))
     print("Risk Level   :", risk_name(packet["risk_level"]))
     print("Timestamp    :", packet["timestamp"])
 
@@ -156,7 +120,6 @@ def receive_packet(receiver_id, packet):
 # =====================================
 
 vehicle_1_distance = 120
-vehicle_1_fog = LOW_FOG
 
 
 # =====================================
@@ -164,7 +127,6 @@ vehicle_1_fog = LOW_FOG
 # =====================================
 
 vehicle_2_distance = 150
-vehicle_2_fog = MEDIUM_FOG
 
 
 # =====================================
@@ -173,15 +135,13 @@ vehicle_2_fog = MEDIUM_FOG
 
 vehicle_1_packet = create_packet(
     vehicle_id=1,
-    distance=vehicle_1_distance,
-    fog_level=vehicle_1_fog
+    distance=vehicle_1_distance
 )
 
 
 vehicle_2_packet = create_packet(
     vehicle_id=2,
-    distance=vehicle_2_distance,
-    fog_level=vehicle_2_fog
+    distance=vehicle_2_distance
 )
 
 
@@ -205,3 +165,4 @@ print("VEHICLE 2 -> VEHICLE 1")
 print("===================================")
 
 receive_packet(1, vehicle_2_packet)
+```
