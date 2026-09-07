@@ -1,4 +1,3 @@
-```python
 import time
 
 
@@ -24,7 +23,7 @@ CRITICAL = 3
 
 def calculate_risk(distance):
 
-    # Risk is calculated only from distance
+    # Base risk from distance
 
     if distance > 100:
         risk = SAFE
@@ -48,15 +47,19 @@ def calculate_risk(distance):
 def risk_name(risk):
 
     if risk == SAFE:
+
         return "SAFE"
 
     elif risk == CAUTION:
+
         return "CAUTION"
 
     elif risk == WARNING:
+
         return "WARNING"
 
     else:
+
         return "CRITICAL"
 
 
@@ -165,4 +168,4 @@ print("VEHICLE 2 -> VEHICLE 1")
 print("===================================")
 
 receive_packet(1, vehicle_2_packet)
-```
+
